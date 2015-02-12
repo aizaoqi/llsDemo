@@ -1,4 +1,4 @@
-package com.liulishuo.llsdemo.model;
+package com.liulishuo.llsdemo.Model;
 
 import java.io.Serializable;
 
