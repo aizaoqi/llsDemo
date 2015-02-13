@@ -109,7 +109,6 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void loadImages(ImageView view, String url) {
-        Log.e("","url:"+url);
         Picasso.with(getApplicationContext())
                 .load(url)
                 .placeholder(R.drawable.loading)

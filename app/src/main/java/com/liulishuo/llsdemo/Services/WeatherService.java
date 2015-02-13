@@ -36,7 +36,6 @@ public class WeatherService {
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(WEB_SERVICE_BASE_URL)
                 .setRequestInterceptor(requestInterceptor)
-                .setLogLevel(RestAdapter.LogLevel.FULL)
                 .setClient(new OkClient(okHttpClient))
                 .build();
 
