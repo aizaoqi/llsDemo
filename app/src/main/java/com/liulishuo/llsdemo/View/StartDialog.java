@@ -31,10 +31,10 @@ public class StartDialog extends Dialog {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dialog_start);
         ButterKnife.inject(this);
-        splash_imageView.startAnimation(shakeAnimation(3));
+        startAnimation();
     }
 
-    public Animation shakeAnimation(int CycleTimes) {
+    private void startAnimation() {
 
         final Animation.AnimationListener animationListener = new Animation.AnimationListener() {
 
@@ -55,10 +55,10 @@ public class StartDialog extends Dialog {
             }
         };
 
-        Animation scaleAnimation = new ScaleAnimation(0.95f, 1.0f, 0.95f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        scaleAnimation.setDuration(1000);
-        scaleAnimation.setRepeatCount(3);
+        Animation scaleAnimation = new ScaleAnimation(0.9f, 1.0f, 0.9f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        scaleAnimation.setDuration(700);
+        scaleAnimation.setRepeatCount(2);
         scaleAnimation.setAnimationListener(animationListener);
-        return scaleAnimation;
+        splash_imageView.startAnimation(scaleAnimation);
     }
 }

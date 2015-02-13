@@ -56,13 +56,9 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
-//        updateWeather();
-//        randomLoadImages();
-//        splash_imageView.startAnimation(shakeAnimation(3));
-        StartDialog startDialog = new StartDialog(this);
-        startDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        startDialog.getWindow().setWindowAnimations(R.style.dialogWindowAnim);
-        startDialog.show();
+        startAnimation();
+        updateWeather();
+        randomLoadImages();
     }
 
 
@@ -87,6 +83,13 @@ public class MainActivity extends ActionBarActivity {
                         cityWeather_textView.setText(weather.getCity() + ":" + weather.getWeather());
                     }
                 });
+    }
+
+    private void startAnimation(){
+        StartDialog startDialog = new StartDialog(this);
+        startDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        startDialog.getWindow().setWindowAnimations(R.style.dialogWindowAnim);
+        startDialog.show();
     }
 
     private void randomLoadImages() {
