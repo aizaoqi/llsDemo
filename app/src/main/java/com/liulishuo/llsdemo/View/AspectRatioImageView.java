@@ -1,13 +1,13 @@
 package com.liulishuo.llsdemo.View;
 
-/**
- * Created by twer on 2/13/15.
- */
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
+/**
+ * Created by twer on 2/13/15.
+ */
 public class AspectRatioImageView extends ImageView {
 
     public AspectRatioImageView(Context context)
