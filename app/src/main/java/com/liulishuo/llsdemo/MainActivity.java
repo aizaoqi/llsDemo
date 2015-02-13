@@ -1,5 +1,6 @@
 package com.liulishuo.llsdemo;
 
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import com.liulishuo.llsdemo.Model.WEATHER;
 import com.liulishuo.llsdemo.Services.WeatherService;
 import com.liulishuo.llsdemo.View.AspectRatioImageView;
+import com.liulishuo.llsdemo.View.StartDialog;
 import com.squareup.picasso.Picasso;
 
 import java.util.Arrays;
@@ -32,6 +34,7 @@ public class MainActivity extends ActionBarActivity {
     @InjectView(R.id.imageRoot_ll)
     LinearLayout imageRoot_layout;
 
+
     public enum TestDataEnum {
         TestData1("http://llss.qiniudn.com/forum/image/525d1960c008906923000001_1397820588.jpg"),
         TestData2("http://llss.qiniudn.com/forum/image/e8275adbeedc48fe9c13cd0efacbabdd_1397877461243.jpg"),
@@ -53,9 +56,16 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
-        updateWeather();
-        randomLoadImages();
+//        updateWeather();
+//        randomLoadImages();
+//        splash_imageView.startAnimation(shakeAnimation(3));
+        StartDialog startDialog = new StartDialog(this);
+        startDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        startDialog.getWindow().setWindowAnimations(R.style.dialogWindowAnim);
+        startDialog.show();
     }
+
+
 
     private void updateWeather() {
         WeatherService weatherService = new WeatherService();
@@ -74,16 +84,16 @@ public class MainActivity extends ActionBarActivity {
 
                     @Override
                     public void onNext(WEATHER weather) {
-                        cityWeather_textView.setText(weather.getCity()+":"+ weather.getWeather());
+                        cityWeather_textView.setText(weather.getCity() + ":" + weather.getWeather());
                     }
                 });
     }
 
-    private void randomLoadImages(){
+    private void randomLoadImages() {
         List<TestDataEnum> list = Arrays.asList(TestDataEnum.values());
         Collections.shuffle(list);
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        for(TestDataEnum data : list){
+        for (TestDataEnum data : list) {
             AspectRatioImageView iv = new AspectRatioImageView(getApplicationContext());
             iv.setLayoutParams(params);
             imageRoot_layout.addView(iv);
@@ -91,12 +101,11 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
-    private void loadImages(ImageView view, String url){
+    private void loadImages(ImageView view, String url) {
         Picasso.with(getApplicationContext())
                 .load(url)
                 .placeholder(R.drawable.loading)
                 .error(R.drawable.error)
                 .into(view);
     }
-
 }

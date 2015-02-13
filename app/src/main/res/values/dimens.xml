@@ -4,4 +4,6 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <dimen name="image_horizontal_margin">10dp</dimen>
+    <dimen name="dp_128">128.0dip</dimen>
+    <dimen name="sp_84">84.0sp</dimen>
 </resources>
