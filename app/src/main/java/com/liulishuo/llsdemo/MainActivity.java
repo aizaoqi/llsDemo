@@ -1,39 +1,52 @@
 package com.liulishuo.llsdemo;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.app.ActionBarActivity;
+import android.widget.TextView;
+
+import com.liulishuo.llsdemo.Model.WEATHER;
+import com.liulishuo.llsdemo.Services.WeatherService;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
 
 
 public class MainActivity extends ActionBarActivity {
+
+    public static final int CITY_ID = 101010100;
+
+    @InjectView(R.id.cityWeather_tv)
+    TextView cityWeather_textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.inject(this);
+        updateWeather();
     }
 
+    private void updateWeather() {
+        WeatherService weatherService = new WeatherService();
+        weatherService.getWeather(CITY_ID)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<WEATHER>() {
+                    @Override
+                    public void onCompleted() {
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+                    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+                    @Override
+                    public void onError(Throwable e) {
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+                    }
 
-        return super.onOptionsItemSelected(item);
+                    @Override
+                    public void onNext(WEATHER weather) {
+                        cityWeather_textView.setText(weather.getCity()+":"+ weather.getWeather());
+                    }
+                });
     }
 }
