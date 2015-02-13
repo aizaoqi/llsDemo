@@ -5,8 +5,8 @@ import com.liulishuo.llsdemo.Model.WEATHER;
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
 import retrofit.http.GET;
+import retrofit.http.Query;
 import rx.Observable;
-import rx.observers.Observers;
 
 /**
  * Created by twer on 2/13/15.
@@ -34,11 +34,11 @@ public class WeatherService {
     }
 
     private interface XiaomiWeatherService {
-        @GET("/weather?cityId={cityId}&imei=529e2dd3d767bdd3595eec30dd481050&device=pisces&miuiVersion=JXCCNBD20.0&modDevice=&source=miuiWeatherApp")
-        Observable<WEATHER> getWeather(int cityId);
+        @GET("/weather?imei=529e2dd3d767bdd3595eec30dd481050&device=pisces&miuiVersion=JXCCNBD20.0&modDevice=&source=miuiWeatherApp")
+        Observable<WEATHER> getWeather(@Query("cityId") int cityId);
     }
 
-    public Observers<WEATHER> getWeather(int cityId){
-        return mWeatherService.getWeather(cityId)
+    public Observable<WEATHER> getWeather(int cityId){
+        return mWeatherService.getWeather(cityId);
     }
 }

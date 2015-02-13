@@ -1,27 +1,33 @@
 package com.liulishuo.llsdemo.Model;
 
-import java.io.Serializable;
-
 /**
  * Created by twer on 2/13/15.
  */
-public class WEATHER implements Serializable {
-    private String city;
-    private String weather;
+public class WEATHER {
+    private REALTIME realtime;
+    private FORECAST forecast;
 
     public String getCity() {
-        return city;
+        return forecast.city;
     }
 
     public void setCity(String city) {
-        this.city = city;
+        this.forecast.city = city;
     }
 
     public String getWeather() {
-        return weather;
+        return realtime.weather;
     }
 
     public void setWeather(String weather) {
-        this.weather = weather;
+        this.realtime.weather = weather;
+    }
+
+    public static class REALTIME {
+        public String weather;
+    }
+
+    public static class FORECAST {
+        public String city;
     }
 }
