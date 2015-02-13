@@ -2,12 +2,14 @@ package com.liulishuo.llsdemo;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.liulishuo.llsdemo.Model.WEATHER;
 import com.liulishuo.llsdemo.Services.WeatherService;
+import com.liulishuo.llsdemo.View.AspectRatioImageView;
 import com.squareup.picasso.Picasso;
 
 import java.util.Arrays;
@@ -52,7 +54,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
         updateWeather();
-        randomloadImages();
+        randomLoadImages();
     }
 
     private void updateWeather() {
@@ -77,11 +79,13 @@ public class MainActivity extends ActionBarActivity {
                 });
     }
 
-    private void randomloadImages(){
+    private void randomLoadImages(){
         List<TestDataEnum> list = Arrays.asList(TestDataEnum.values());
         Collections.shuffle(list);
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         for(TestDataEnum data : list){
-            ImageView iv = new ImageView(getApplicationContext());
+            AspectRatioImageView iv = new AspectRatioImageView(getApplicationContext());
+            iv.setLayoutParams(params);
             imageRoot_layout.addView(iv);
             loadImages(iv, data.getURL());
         }

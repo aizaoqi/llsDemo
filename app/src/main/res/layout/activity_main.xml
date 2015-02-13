@@ -12,14 +12,21 @@
         android:layout_centerHorizontal="true"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <LinearLayout
-        android:layout_below="@+id/cityWeather_tv"
-        android:id="@+id/imageRoot_ll"
-        android:orientation="vertical"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/cityWeather_tv"
         android:paddingLeft="@dimen/image_horizontal_margin"
-        android:paddingRight="@dimen/image_horizontal_margin" >
+        android:paddingRight="@dimen/image_horizontal_margin">
 
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/imageRoot_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
+    </ScrollView>
+
+
 </RelativeLayout>
