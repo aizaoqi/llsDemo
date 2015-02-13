@@ -1,7 +1,7 @@
 package com.liulishuo.llsdemo.Model;
 
 /**
- * Created by twer on 2/13/15.
+ * Created by twer on 2/13/15
  */
 public class WEATHER {
     private REALTIME realtime;
