@@ -5,4 +5,8 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="dialogWindowAnim" parent="android:Animation">
+        <item name="android:windowExitAnimation">@anim/scale_dialog_out</item>
+    </style>
+
 </resources>
