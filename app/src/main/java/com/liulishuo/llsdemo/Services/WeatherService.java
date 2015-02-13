@@ -1,9 +1,13 @@
 package com.liulishuo.llsdemo.Services;
 
 import com.liulishuo.llsdemo.Model.WEATHER;
+import com.squareup.okhttp.OkHttpClient;
+
+import java.util.concurrent.TimeUnit;
 
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
+import retrofit.client.OkClient;
 import retrofit.http.GET;
 import retrofit.http.Query;
 import rx.Observable;
@@ -17,10 +21,15 @@ public class WeatherService {
     private final XiaomiWeatherService mWeatherService;
 
     public WeatherService() {
+        OkHttpClient okHttpClient = new OkHttpClient();
+        okHttpClient.setReadTimeout(10, TimeUnit.SECONDS);
+        okHttpClient.setConnectTimeout(10, TimeUnit.SECONDS);
+
         RequestInterceptor requestInterceptor = new RequestInterceptor() {
             @Override
             public void intercept(RequestInterceptor.RequestFacade request) {
                 request.addHeader("Accept", "application/json");
+                request.addHeader("Connection", "Keep-Alive");
             }
         };
 
@@ -28,6 +37,7 @@ public class WeatherService {
                 .setEndpoint(WEB_SERVICE_BASE_URL)
                 .setRequestInterceptor(requestInterceptor)
                 .setLogLevel(RestAdapter.LogLevel.FULL)
+                .setClient(new OkClient(okHttpClient))
                 .build();
 
         mWeatherService = restAdapter.create(XiaomiWeatherService.class);

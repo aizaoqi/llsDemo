@@ -3,6 +3,7 @@ package com.liulishuo.llsdemo;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -56,12 +57,15 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         startAnimation();
         updateWeather();
         randomLoadImages();
     }
-
-
 
     private void updateWeather() {
         WeatherService weatherService = new WeatherService();
@@ -75,7 +79,7 @@ public class MainActivity extends ActionBarActivity {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        Log.e("MainActivity", "Throwable:"+e);
                     }
 
                     @Override
@@ -105,6 +109,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void loadImages(ImageView view, String url) {
+        Log.e("","url:"+url);
         Picasso.with(getApplicationContext())
                 .load(url)
                 .placeholder(R.drawable.loading)
